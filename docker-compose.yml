@@ -1,0 +1,32 @@
+version: '3'
+services:
+  backend-todo:
+    container_name: backend_todo
+    build: .
+    volumes:
+      - .:/src
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - postgres_todo
+    links:
+      - postgres_todo
+    command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "npm run production"]
+    # command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "yarn start"]
+
+  postgres_todo:
+    container_name: postgres_todo
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_todo:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+
+volumes:
+  backend_todo:
+  postgres_todo:
