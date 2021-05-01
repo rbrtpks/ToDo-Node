@@ -75,7 +75,6 @@ module.exports = app => {
         })
 
       await Promise.all(list.map(async (element) => {
-        console.log("ELEMENTO",element)
         await app.db('todo_list')
           .insert(element)
       }))
