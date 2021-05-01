@@ -13,8 +13,8 @@ services:
       - postgres_todo
     links:
       - postgres_todo
-    # command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "npm run production"]
-    command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "yarn start"]
+    command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "npm run production"]
+    # command: ["bash", "./wait-for-postgres.sh", "postgres_todo:5432", "yarn start"]
 
   postgres_todo:
     container_name: postgres_todo
